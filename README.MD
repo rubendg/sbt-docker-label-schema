@@ -26,7 +26,7 @@ docker inspect --format='{{.Config.Labels}}' {image_id}
 ```
 
 will by default apply a sensible mapping from already existing sbt keys to [label-schema](http://label-schema.org/rc1/) labels.
-You can further add to or override this mapping by modifying the `dockerLabelSchema` setting key:
+You can further add to or override this mapping by modifying the `dockerLabelSchema` setting key, e.g. like this:
 
 ```scala
 dockerLabelSchema := dockerLabelSchema.value.copy(
