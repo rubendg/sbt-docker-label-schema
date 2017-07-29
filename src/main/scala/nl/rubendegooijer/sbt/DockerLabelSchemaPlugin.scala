@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 nl.rubendegooijer.sbt
+ * Copyright (c) 2017 Ruben de Gooijer
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -23,9 +23,10 @@ package nl.rubendegooijer.sbt
 
 import java.time.Instant
 
-import sbt._
+import sbt.{Def, _}
 import Keys._
 import com.typesafe.sbt.packager.docker.{Cmd, DockerPlugin}
+import DockerPlugin.autoImport.dockerCommands
 
 object DockerLabelSchemaPlugin extends AutoPlugin {
 
@@ -34,18 +35,17 @@ object DockerLabelSchemaPlugin extends AutoPlugin {
       SettingKey[LabelSchema]("dockerLabelSchema", "The label-schema data to be attached as Docker labels")
   }
 
-  import DockerPlugin.autoImport._
   import autoImport._
 
   override def requires: Plugins = DockerPlugin
 
   override def trigger: PluginTrigger = allRequirements
 
-  private val labelSchemaAsDockerLabels: LabelSchema => String =
+  private val labelSchemaAsDockerLabels: LabelSchema => Option[String] =
     LabelSchema.toMap _ andThen DockerLabel.fromMap
 
   @SuppressWarnings(Array("org.wartremover.warts.Any", "org.wartremover.warts.Nothing"))
-  override lazy val projectSettings: Seq[Setting[_]] = Seq(
+  lazy val baseDockerLabelSchemaSettings: Seq[Def.Setting[_]] = Seq(
     dockerLabelSchema := LabelSchema(
       name = Some(name.value),
       buildDate = Some(Instant.now()),
@@ -56,8 +56,13 @@ object DockerLabelSchemaPlugin extends AutoPlugin {
       vcsUrl = Seq(scmInfo.value.map(_.browseUrl), Git.native.remoteUrl).pickFirst,
       vcsRef = Git.native.headCommit
     ),
-    dockerCommands += Cmd("LABEL", labelSchemaAsDockerLabels(dockerLabelSchema.value))
+    dockerCommands ++= labelSchemaAsDockerLabels(dockerLabelSchema.value)
+      .map(labelSchemaLabels => Seq(Cmd("LABEL", labelSchemaLabels)))
+      .getOrElse(Seq.empty)
   )
+
+  @SuppressWarnings(Array("org.wartremover.warts.Any", "org.wartremover.warts.Nothing"))
+  override lazy val projectSettings: Seq[Def.Setting[_]] = baseDockerLabelSchemaSettings
 
   private implicit class EnhancedSeq[T](val s: Seq[Option[T]]) extends AnyVal {
     def pickFirst: Option[T] = s.find(_.nonEmpty).flatten

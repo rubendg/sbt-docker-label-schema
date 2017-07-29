@@ -21,28 +21,37 @@
 
 package nl.rubendegooijer.sbt
 
-private[sbt] object DockerLabel {
+import org.scalatest.{Matchers, WordSpec}
+import DockerLabel._
 
-  /**
-    *
-    * @param k
-    * @param v
-    * @return
-    */
-  def label(k: String, v: String): String = s"""$k="$v""""
+final class DockerLabelSpec extends WordSpec with Matchers {
 
-  /**
-    *
-    * @param labels
-    * @return
-    */
-  def fromMap(labels: Map[String, String]): Option[String] =
-    if (labels.isEmpty) None
-    else
-      Some {
-        labels.toSeq
-          .sortBy(_._1)
-          .map { case (k, v) => label(k, v) }
-          .mkString(" ")
-      }
+  "label" should {
+
+    "quote values" in {
+      label("a", "b") shouldBe """a="b""""
+    }
+
+  }
+
+  "fromMap" should {
+
+    "when the map is empty return no labels" in {
+      fromMap(Map.empty[String, String]) shouldBe None
+    }
+
+    "when the map contains a single element do the same as label" in {
+      fromMap(Map("a" -> "b")) shouldBe Some(label("a", "b"))
+    }
+
+    "separate labels by spaces" in {
+      fromMap(Map("a" -> "b", "b" -> "c")) shouldBe Some("""a="b" b="c"""")
+    }
+
+    "sort labels by key" in {
+      fromMap(Map("b" -> "c", "a" -> "b")) shouldBe Some("""a="b" b="c"""")
+    }
+
+  }
+
 }
