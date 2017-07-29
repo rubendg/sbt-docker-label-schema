@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 nl.rubendegooijer.sbt
+ * Copyright (c) 2017 Ruben de Gooijer
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -34,7 +34,7 @@ final class GitSpec extends WordSpec with Matchers {
   val default: VcsSupportImpl =
     VcsSupportImpl(headCommit = Success("hash"), remoteUrl = Success("https://www.example.com"))
 
-  "Git.remoteUrl" should {
+  "remoteUrl" should {
 
     "parse the remoteUrl when present" in {
       val git = new Git(default)
@@ -58,7 +58,7 @@ final class GitSpec extends WordSpec with Matchers {
     }
   }
 
-  "Git.headCommit" should {
+  "headCommit" should {
     "return the commit hash" in {
       new Git(default).headCommit shouldBe Some("hash")
     }
