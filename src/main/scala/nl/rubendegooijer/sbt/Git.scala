@@ -29,6 +29,7 @@ import scala.util.Try
 private object GitNative extends VcsSupport {
   override def headCommit: Try[String] =
     Try(Process("git rev-parse --verify HEAD").!!)
+      .flatMap(result => Try(result.split("\n").head))
 
   override def remoteUrl: Try[String] =
     Try(Process("git config --get remote.origin.url").!!)
