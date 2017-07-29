@@ -5,7 +5,7 @@ lazy val repo = "https://github.com/rubendg/sbt-docker-label-schema"
 
 lazy val buildSettings =
   Seq(
-    name := "docker-label-schema",
+    name := "sbt-docker-label-schema",
     organization := "nl.rubendegooijer.sbt",
     description :=
       """
