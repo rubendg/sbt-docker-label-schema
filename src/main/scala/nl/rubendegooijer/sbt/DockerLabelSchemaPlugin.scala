@@ -63,8 +63,4 @@ object DockerLabelSchemaPlugin extends AutoPlugin {
 
   @SuppressWarnings(Array("org.wartremover.warts.Any", "org.wartremover.warts.Nothing"))
   override lazy val projectSettings: Seq[Def.Setting[_]] = inConfig(Docker)(baseDockerLabelSchemaSettings)
-
-  private implicit class EnhancedSeq[T](val s: Seq[Option[T]]) extends AnyVal {
-    def pickFirst: Option[T] = s.find(_.nonEmpty).flatten
-  }
 }
