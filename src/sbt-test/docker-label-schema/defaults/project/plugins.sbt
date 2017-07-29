@@ -5,6 +5,6 @@
                                   |Specify this property using the scriptedLaunchOpts -D.""".stripMargin)
   else {
     addSbtPlugin("com.typesafe.sbt" % "sbt-native-packager" % "1.2.0")
-    addSbtPlugin("nl.rubendegooijer.sbt" % "docker-label-schema" % pluginVersion)
+    addSbtPlugin("nl.rubendegooijer.sbt" % "sbt-docker-label-schema" % pluginVersion)
   }
 }
