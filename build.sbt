@@ -7,6 +7,7 @@ lazy val buildSettings =
   Seq(
     name := "sbt-docker-label-schema",
     organization := "nl.rubendegooijer.sbt",
+    organizationName := "Ruben de Gooijer",
     description :=
       """
         |sbt-docker-label-schema is an sbt plugin for applying label-schema labels to
