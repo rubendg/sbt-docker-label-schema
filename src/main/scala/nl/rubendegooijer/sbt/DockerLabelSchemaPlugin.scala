@@ -26,7 +26,6 @@ import java.time.Instant
 import sbt.{Def, _}
 import Keys._
 import com.typesafe.sbt.packager.docker.{Cmd, DockerPlugin}
-import DockerPlugin.autoImport.dockerCommands
 
 object DockerLabelSchemaPlugin extends AutoPlugin {
 
@@ -36,6 +35,7 @@ object DockerLabelSchemaPlugin extends AutoPlugin {
   }
 
   import autoImport._
+  import DockerPlugin.autoImport._
 
   override def requires: Plugins = DockerPlugin
 
@@ -62,7 +62,7 @@ object DockerLabelSchemaPlugin extends AutoPlugin {
   )
 
   @SuppressWarnings(Array("org.wartremover.warts.Any", "org.wartremover.warts.Nothing"))
-  override lazy val projectSettings: Seq[Def.Setting[_]] = baseDockerLabelSchemaSettings
+  override lazy val projectSettings: Seq[Def.Setting[_]] = inConfig(Docker)(baseDockerLabelSchemaSettings)
 
   private implicit class EnhancedSeq[T](val s: Seq[Option[T]]) extends AnyVal {
     def pickFirst: Option[T] = s.find(_.nonEmpty).flatten

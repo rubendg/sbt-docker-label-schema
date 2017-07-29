@@ -6,7 +6,7 @@ version := "1.0"
 
 scalaVersion := "2.11.6"
 
-dockerLabelSchema := dockerLabelSchema.value.copy(buildDate = Some(Instant.parse("2017-07-23T12:16:28.634Z")))
+dockerLabelSchema in Docker := (dockerLabelSchema in Docker).value.copy(buildDate = Some(Instant.parse("2017-07-23T12:16:28.634Z")))
 
 enablePlugins(JavaAppPackaging)
 

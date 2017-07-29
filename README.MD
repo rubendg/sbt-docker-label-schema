@@ -29,7 +29,7 @@ will by default apply a sensible mapping from already existing sbt keys to [labe
 You can further add to or override this mapping by modifying the `dockerLabelSchema` setting key, e.g. like this:
 
 ```scala
-dockerLabelSchema := dockerLabelSchema.value.copy(
+dockerLabelSchema in Docker := (dockerLabelSchema in Docker).value.copy(
   usage = Some("/usr/doc/app-usage.txt")
 )
 ```

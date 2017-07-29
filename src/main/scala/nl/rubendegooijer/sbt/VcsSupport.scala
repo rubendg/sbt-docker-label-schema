@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 nl.rubendegooijer.sbt
+ * Copyright (c) 2017 Ruben de Gooijer
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -24,6 +24,16 @@ package nl.rubendegooijer.sbt
 import scala.util.Try
 
 trait VcsSupport {
+
+  /**
+    *
+    * @return
+    */
   def headCommit: Try[String]
+
+  /**
+    *
+    * @return
+    */
   def remoteUrl: Try[String]
 }

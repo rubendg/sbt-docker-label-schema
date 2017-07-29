@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 nl.rubendegooijer.sbt
+ * Copyright (c) 2017 Ruben de Gooijer
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -48,9 +48,20 @@ final case class DockerCmd(devel: Option[String] = None,
 
 private[sbt] object LabelSchema {
 
+  /**
+    *
+    * @param name
+    * @param labels
+    * @return
+    */
   private[sbt] def ns(name: String, labels: Map[String, String]): Map[String, String] =
     labels.map { case (k, v) => (s"$name.$k", v) }
 
+  /**
+    *
+    * @param labelSchema
+    * @return
+    */
   private[sbt] def toMap(labelSchema: LabelSchema): Map[String, String] = {
 
     def formatDockerCmd(dockerCmd: DockerCmd): Map[String, String] =
