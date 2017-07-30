@@ -13,19 +13,19 @@ In order to add the sbt-docker-label-schema plugin to your build, add the follow
 addSbtPlugin("nl.rubendegooijer" % "sbt-docker-label-schema" % "")
 ```
 
-This will automatically enable the plugin if you've enabled the sbt-native-packager `DockerPlugin`.
+The plugin is automatically enabled if it finds that sbt-native-packager's `DockerPlugin` is enabled.
 
-Running
+To see the result of activating the plugin run:
 
 ```bash
 # docker image
 sbt docker:publishLocal 
 
-# inspect the image 
-docker inspect --format='{{.Config.Labels}}' {image_id}
+# and inspect the image's labels
+docker inspect --format='{{.Config.Labels}}' "<IMAGE ID HERE>"
 ```
 
-will by default apply a sensible mapping from already existing sbt keys to [label-schema](http://label-schema.org/rc1/) labels.
+this will by default apply a sensible mapping from already existing sbt keys to [label-schema](http://label-schema.org/rc1/) labels.
 You can further add to or override this mapping by modifying the `dockerLabelSchema` setting key, e.g. like this:
 
 ```scala
@@ -33,6 +33,12 @@ dockerLabelSchema in Docker := (dockerLabelSchema in Docker).value.copy(
   usage = Some("/usr/doc/app-usage.txt")
 )
 ```
+
+## Requirements
+
+- Scala 2.10.6
+- sbt 0.13.15 or higher
+- sbt-native-packager 1.2.0 or higher
 
 ## Contribution Policy
 
