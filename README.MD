@@ -34,6 +34,18 @@ dockerLabelSchema in Docker := (dockerLabelSchema in Docker).value.copy(
 )
 ```
 
+## Default mapping
+
+| label-schema                 | source                                                         |
+|------------------------------|----------------------------------------------------------------|
+| org.label-schema.name        | sbt.Keys.name                                                  |
+| org.label-schema.description | sbt.Keys.description                                           |
+| org.label-schema.version     | sbt.Keys.version                                               |
+| org.label-schema.url         | sbt.Keys.apiUrl or sbt.Keys.projectInfo.organizationHomepage   |
+| org.label-schema.vendor      | sbt.Keys.organizationName                                      |
+| org.label-schema.vcs-url     | sbt.Keys.scmInfo.browserUrl or git remote url                  | 
+| org.label-schema.vcs-ref     | git commit head                                                |
+
 ## Requirements
 
 - Scala 2.10.6
