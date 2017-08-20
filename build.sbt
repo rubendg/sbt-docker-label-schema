@@ -54,7 +54,7 @@ addSbtPlugin("com.typesafe.sbt" % "sbt-native-packager" % "1.2.0")
 
 val dockerLabelSchemaPlugin = project
   .in(file("."))
-  .enablePlugins(GitVersioning, AutomateHeaderPlugin)
+  .enablePlugins(GitVersioning, GitBranchPrompt, AutomateHeaderPlugin)
   .settings(buildSettings ++ bintraySettings ++ scriptedSettings)
   .settings(
     publishMavenStyle := false,
