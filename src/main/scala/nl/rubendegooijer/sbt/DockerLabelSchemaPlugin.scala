@@ -23,7 +23,7 @@ package nl.rubendegooijer.sbt
 
 import java.time.Instant
 
-import sbt.{Def, _}
+import sbt._
 import Keys._
 import com.typesafe.sbt.packager.docker.{Cmd, DockerPlugin}
 
@@ -45,7 +45,7 @@ object DockerLabelSchemaPlugin extends AutoPlugin {
     LabelSchema.toMap _ andThen DockerLabel.fromMap
 
   @SuppressWarnings(Array("org.wartremover.warts.Any", "org.wartremover.warts.Nothing"))
-  lazy val baseDockerLabelSchemaSettings: Seq[Def.Setting[_]] = Seq(
+  lazy val baseDockerLabelSchemaSettings: Seq[Setting[_]] = Seq(
     dockerLabelSchema := LabelSchema(
       name = Some(name.value),
       buildDate = Some(Instant.now()),
