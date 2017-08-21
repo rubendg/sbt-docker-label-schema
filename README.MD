@@ -36,15 +36,18 @@ dockerLabelSchema in Docker := (dockerLabelSchema in Docker).value.copy(
 
 ## Default mapping
 
-| label-schema                 | source                                                         |
-|------------------------------|----------------------------------------------------------------|
-| org.label-schema.name        | sbt.Keys.name                                                  |
-| org.label-schema.description | sbt.Keys.description                                           |
-| org.label-schema.version     | sbt.Keys.version                                               |
-| org.label-schema.url         | sbt.Keys.apiUrl or sbt.Keys.projectInfo.organizationHomepage   |
-| org.label-schema.vendor      | sbt.Keys.organizationName                                      |
-| org.label-schema.vcs-url     | sbt.Keys.scmInfo.browserUrl or git remote url                  | 
-| org.label-schema.vcs-ref     | git commit head                                                |
+This table describes the default mapping of SBT keys or otherwise to label-schema keys.  
+
+| source                                                         | label-schema                  |
+|----------------------------------------------------------------|-------------------------------|
+| sbt.Keys.name                                                  | org.label-schema.name         |
+| sbt.Keys.description                                           | org.label-schema.description  |
+| now                                                            | org.label-schema.build-date   |
+| sbt.Keys.version                                               | org.label-schema.version      |
+| sbt.Keys.apiUrl or sbt.Keys.projectInfo.organizationHomepage   | org.label-schema.url          |
+| sbt.Keys.organizationName                                      | org.label-schema.vendor       |
+| sbt.Keys.scmInfo.browserUrl or git remote url                  | org.label-schema.vcs-url      |
+| git commit head                                                | org.label-schema.vcs-ref      |
 
 ## Requirements
 
