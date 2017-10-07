@@ -57,6 +57,9 @@ val dockerLabelSchemaPlugin = project
   .enablePlugins(GitVersioning, GitBranchPrompt, AutomateHeaderPlugin)
   .settings(buildSettings ++ bintraySettings ++ scriptedSettings)
   .settings(
+    scalafmtOnCompile in ThisBuild := true,
+    scalafmtTestOnCompile in ThisBuild := true,
+    scalafmtFailTest in ThisBuild := false,
     publishMavenStyle := false,
     scriptedLaunchOpts ++= Seq("-Xmx1024M", s"-Dplugin.version=${version.value}"),
     scriptedBufferLog := false,
