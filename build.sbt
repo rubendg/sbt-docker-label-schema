@@ -1,5 +1,4 @@
 import sbt.Keys.{organization, sbtPlugin, scalacOptions}
-import sbt.ScriptedPlugin.scriptedBufferLog
 
 lazy val repo = "https://github.com/rubendg/sbt-docker-label-schema"
 
@@ -16,7 +15,7 @@ lazy val buildSettings =
     homepage := Some(url(repo)),
     startYear := Some(2017),
     licenses += ("MIT", new URL("https://opensource.org/licenses/MIT")),
-    scalaVersion := "2.10.6",
+    scalaVersion in Global := "2.12.4",
     scalacOptions in ThisBuild ++= Seq(
       "-deprecation",
       "-encoding",
@@ -31,6 +30,7 @@ lazy val buildSettings =
       "-Ywarn-value-discard",
       "-Xfuture"
     ),
+    crossSbtVersions := Vector("0.13.16", "1.1.1"),
     git.useGitDescribe := true,
     sbtPlugin := true,
     onLoad in Global := (onLoad in Global).value.andThen(st => {
@@ -49,18 +49,27 @@ lazy val bintraySettings = Seq(
   }
 )
 
-addSbtPlugin("com.typesafe.sbt" % "sbt-native-packager" % "1.2.0")
+addSbtPlugin("com.typesafe.sbt" %% "sbt-native-packager" % "1.3.3" % "provided")
 
 val dockerLabelSchemaPlugin = project
   .in(file("."))
   .enablePlugins(GitVersioning, GitBranchPrompt, AutomateHeaderPlugin)
-  .settings(buildSettings ++ bintraySettings ++ scriptedSettings)
+  .settings(buildSettings ++ bintraySettings)
   .settings(
     scalafmtOnCompile in ThisBuild := true,
     scalafmtTestOnCompile in ThisBuild := true,
     scalafmtFailTest in ThisBuild := false,
     publishMavenStyle := false,
-    scriptedLaunchOpts ++= Seq("-Xmx1024M", s"-Dplugin.version=${version.value}"),
     scriptedBufferLog := false,
-    libraryDependencies ++= Seq("org.scalatest" %% "scalatest" % "3.0.3" % Test)
+    scriptedLaunchOpts ++= Seq(
+      "-Xmx1024M",
+      "-Dnative-packager-version=" + {
+        sbtVersion.value match {
+          case v if v.startsWith("1.") => "1.3.3"
+          case _ => "1.2.0"
+        }
+      },
+      s"-Dproject.version=${version.value}"
+    ),
+    libraryDependencies ++= Seq("org.scalatest" %% "scalatest" % "3.0.5" % Test)
   )

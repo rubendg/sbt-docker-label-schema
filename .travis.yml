@@ -3,12 +3,16 @@ language: scala
 services:
   - docker
 
-scala:
-  - 2.10.6
-
 jdk:
   - oraclejdk8
 
 script:
-  - sbt test
-  - sbt scripted
+  - sbt ^test
+  - sbt ^scripted
+
+sudo: false
+cache:
+  apt: true
+  directories:
+  - $HOME/.sbt
+  - $HOME/.ivy2

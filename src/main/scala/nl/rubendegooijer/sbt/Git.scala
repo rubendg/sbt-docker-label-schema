@@ -21,10 +21,10 @@
 
 package nl.rubendegooijer.sbt
 
-import sbt.Process
 import java.net.URL
 
 import scala.util.Try
+import scala.sys.process.Process
 
 private object GitNative extends VcsSupport {
   override def headCommit: Try[String] =
