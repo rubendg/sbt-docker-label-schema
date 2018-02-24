@@ -5,7 +5,7 @@
 sbt-docker-label-schema is a [sbt](http://www.scala-sbt.org/) plugin for applying [label-schema](http://label-schema.org/rc1/) labels to
 your Docker images created by the [sbt-native-packager](http://www.scala-sbt.org/sbt-native-packager/) Docker packaging format.
 
-## Getting Started
+## Usage Instructions
 
 In order to add the sbt-docker-label-schema plugin to your build, add the following line to `project/plugins.sbt`:
 
@@ -13,7 +13,13 @@ In order to add the sbt-docker-label-schema plugin to your build, add the follow
 addSbtPlugin("nl.rubendegooijer" % "sbt-docker-label-schema" % "")
 ```
 
-The plugin is automatically enabled if it finds that sbt-native-packager's `DockerPlugin` is enabled.
+The plugin currently supports sbt versions `>= 0.13.16` and `1.x`, and is tested against `sbt-native-packager`
+`1.2.2` and `1.3.3`. The plugin **does not** automatically include a dependency on the `sbt-native-packager` 
+you'll have to do that yourself:
+
+```scala
+addSbtPlugin("com.typesafe.sbt" %% "sbt-native-packager" % "1.3.3")
+```
 
 To see the result of activating the plugin run:
 
@@ -49,11 +55,6 @@ This table describes the default mapping of SBT keys or otherwise to label-schem
 | sbt.Keys.scmInfo.browserUrl or git remote url                  | org.label-schema.vcs-url      |
 | git commit head                                                | org.label-schema.vcs-ref      |
 
-## Requirements
-
-- Scala 2.10.6
-- sbt 0.13.15 or higher
-- sbt-native-packager 1.2.0 or higher
 
 ## Contribution Policy
 
