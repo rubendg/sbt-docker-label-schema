@@ -44,7 +44,6 @@ object DockerLabelSchemaPlugin extends AutoPlugin {
   private val labelSchemaAsDockerLabels: LabelSchema => Option[String] =
     LabelSchema.toMap _ andThen DockerLabel.fromMap
 
-  @SuppressWarnings(Array("org.wartremover.warts.Any", "org.wartremover.warts.Nothing"))
   lazy val baseDockerLabelSchemaSettings: Seq[Setting[_]] = Seq(
     dockerLabelSchema := LabelSchema(
       name = Some(name.value),
@@ -61,6 +60,5 @@ object DockerLabelSchemaPlugin extends AutoPlugin {
       .getOrElse(Seq.empty)
   )
 
-  @SuppressWarnings(Array("org.wartremover.warts.Any", "org.wartremover.warts.Nothing"))
   override lazy val projectSettings: Seq[Def.Setting[_]] = inConfig(Docker)(baseDockerLabelSchemaSettings)
 }

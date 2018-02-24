@@ -16,7 +16,6 @@ lazy val buildSettings =
     homepage := Some(url(repo)),
     startYear := Some(2017),
     licenses += ("MIT", new URL("https://opensource.org/licenses/MIT")),
-    wartremoverErrors ++= Warts.allBut(Wart.DefaultArguments, Wart.Overloading),
     scalaVersion := "2.10.6",
     scalacOptions in ThisBuild ++= Seq(
       "-deprecation",
@@ -42,7 +41,7 @@ lazy val buildSettings =
 
 lazy val bintraySettings = Seq(
   bintrayReleaseOnPublish := false,
-  bintrayPackageLabels := Seq("sbt", "docker", "label-schema", "labels"),
+  bintrayPackageLabels := Seq("sbt", "docker", "label-schema", "labels", "metadata"),
   bintrayVcsUrl := Some(repo),
   publishMavenStyle := false,
   pomIncludeRepository := { _ ⇒
