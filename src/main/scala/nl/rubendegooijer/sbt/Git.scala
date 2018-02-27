@@ -27,12 +27,15 @@ import scala.util.Try
 import scala.sys.process.Process
 
 private object GitNative extends VcsSupport {
+
+  private def headLines(cmd: String) =
+    Try(Process(cmd).!!).map(_.split("\n").head)
+
   override def headCommit: Try[String] =
-    Try(Process("git rev-parse --verify HEAD").!!)
-      .flatMap(result => Try(result.split("\n").head))
+    headLines("git rev-parse --verify HEAD")
 
   override def remoteUrl: Try[String] =
-    Try(Process("git config --get remote.origin.url").!!)
+    headLines("git config --get remote.origin.url")
 }
 
 object Git {
