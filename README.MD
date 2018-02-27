@@ -8,9 +8,11 @@ your Docker images created by the [sbt-native-packager](http://www.scala-sbt.org
 
 ## Usage Instructions
 
-In order to add the sbt-docker-label-schema plugin to your build, add the following line to `project/plugins.sbt`:
+In order to add the sbt-docker-label-schema plugin to your build, add the following lines to `project/plugins.sbt`:
 
 ```scala
+resolvers += Resolver.bintrayIvyRepo("rubendg", "sbt-plugins")
+
 addSbtPlugin("nl.rubendegooijer" % "sbt-docker-label-schema" % "0.1.0")
 ```
 
