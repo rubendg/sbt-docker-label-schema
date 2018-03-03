@@ -9,8 +9,8 @@ lazy val buildSettings =
     organizationName := "Ruben de Gooijer",
     description :=
       """
-        |sbt-docker-label-schema is an sbt plugin for applying label-schema labels to
-        |your Docker images created by the sbt-native-packager Docker packaging format.
+        |sbt-docker-label-schema is a sbt plugin that automatically applies
+        |label-schema labels to Docker images created by the sbt-native-packager plugin.
       """.stripMargin,
     homepage := Some(url(repo)),
     startYear := Some(2017),

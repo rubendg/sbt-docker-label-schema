@@ -3,8 +3,9 @@
 [![Build Status](https://travis-ci.org/rubendg/sbt-docker-label-schema.svg?branch=master)](https://travis-ci.org/rubendg/sbt-docker-label-schema)
 [![Download](https://api.bintray.com/packages/rubendg/sbt-plugins/sbt-docker-label-schema/images/download.svg) ](https://bintray.com/rubendg/sbt-plugins/sbt-docker-label-schema/_latestVersion)
 
-sbt-docker-label-schema is a [sbt](http://www.scala-sbt.org/) plugin for applying [label-schema](http://label-schema.org/rc1/) labels to
-your Docker images created by the [sbt-native-packager](http://www.scala-sbt.org/sbt-native-packager/) Docker packaging format.
+sbt-docker-label-schema is a [sbt](http://www.scala-sbt.org/) plugin for automatically applying 
+[label-schema](http://label-schema.org/rc1/) labels to Docker images created by the 
+[sbt-native-packager](http://www.scala-sbt.org/sbt-native-packager/) plugin.
 
 ## Usage Instructions
 
