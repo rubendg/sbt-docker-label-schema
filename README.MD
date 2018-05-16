@@ -14,7 +14,7 @@ In order to add the sbt-docker-label-schema plugin to your build, add the follow
 ```scala
 resolvers += Resolver.bintrayIvyRepo("rubendg", "sbt-plugins")
 
-addSbtPlugin("nl.rubendegooijer" % "sbt-docker-label-schema" % "0.1.1")
+addSbtPlugin("nl.rubendegooijer.sbt" % "sbt-docker-label-schema" % "0.1.1")
 ```
 
 The plugin currently supports sbt versions `>= 0.13.16` and `1.x`, and is tested against `sbt-native-packager`
